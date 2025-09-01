@@ -7,9 +7,14 @@ public class TaskList {
         taskCount++;
     }
 
+    public void markTask(int taskIndex) {
+        taskList[taskIndex].setIsDone(true);
+    }
+
     public void printTasks() {
         for (int i = 0; i < taskCount; i++) {
-            System.out.println(i+1 + ". " + taskList[i].getDescription());
+            Task currTask = taskList[i];
+            System.out.println(i+1 + ". " + currTask.getStatusIcon() + " " +  currTask.getDescription());
         }
     }
 }

@@ -25,6 +25,9 @@ public class Odin {
                 printHorizontalLine();
                 t.printTasks();
                 printHorizontalLine();
+            } else if (input.startsWith("mark")) {
+                int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+                t.markTask(taskIndex);
             } else {
                 t.addTask(input);
                 printHorizontalLine();
