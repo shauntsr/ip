@@ -9,7 +9,7 @@ public class TaskList {
 
     public void printTasks() {
         for (int i = 0; i < taskCount; i++) {
-            System.out.println(taskList[i].getDescription());
+            System.out.println(i+1 + ". " + taskList[i].getDescription());
         }
     }
 }
