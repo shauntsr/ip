@@ -5,12 +5,15 @@ public class Odin {
         System.out.println("__________________________________________");
     }
     public static void main(String[] args) {
+        TaskList t = new TaskList();
+
         printHorizontalLine();
         System.out.println("Hello! I'm Odin");
         System.out.println("What can I do for you?");
         printHorizontalLine();
 
         Scanner scanner = new Scanner(System.in);
+
         while (true) {
             String input = scanner.nextLine();
 
@@ -18,9 +21,16 @@ public class Odin {
                 break;
             }
 
-            printHorizontalLine();
-            System.out.println(input);
-            printHorizontalLine();
+            if (input.equals("list")) {
+                printHorizontalLine();
+                t.printTasks();
+                printHorizontalLine();
+            } else {
+                t.addTask(input);
+                printHorizontalLine();
+                System.out.println("added: " + input);
+                printHorizontalLine();
+            }
         }
 
         printHorizontalLine();
