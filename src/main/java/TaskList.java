@@ -14,7 +14,7 @@ public class TaskList {
     public void printTasks() {
         for (int i = 0; i < taskCount; i++) {
             Task currTask = taskList[i];
-            System.out.println(i+1 + ". " + currTask.getStatusIcon() + " " +  currTask.getDescription());
+            System.out.println(i+1 + ". " + currTask.getDisplayString());
         }
     }
 }
