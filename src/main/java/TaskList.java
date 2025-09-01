@@ -13,6 +13,12 @@ public class TaskList {
         System.out.println("   " + taskList[taskIndex].getDisplayString());
     }
 
+    public void unmarkTask(int taskIndex) {
+        taskList[taskIndex].setIsDone(false);
+        System.out.println("Please tell me it was a misinput.");
+        System.out.println("   " + taskList[taskIndex].getDisplayString());
+    }
+
     public void printTasks() {
         for (int i = 0; i < taskCount; i++) {
             Task currTask = taskList[i];

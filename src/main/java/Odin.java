@@ -7,17 +7,18 @@ public class Odin {
     public static void main(String[] args) {
         TaskList t = new TaskList();
 
+        // Introduction
         printHorizontalLine();
         System.out.println("Hello! I'm Odin");
         System.out.println("What can I do for you?");
         printHorizontalLine();
 
         Scanner scanner = new Scanner(System.in);
-
         while (true) {
             String input = scanner.nextLine();
 
             printHorizontalLine();
+
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 printHorizontalLine();
@@ -29,10 +30,14 @@ public class Odin {
             } else if (input.startsWith("mark")) {
                 int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
                 t.markTask(taskIndex);
+            } else if (input.startsWith("unmark")) {
+                int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+                t.unmarkTask(taskIndex);
             } else {
                 t.addTask(input);
                 System.out.println("added: " + input);
             }
+
             printHorizontalLine();
         }
    }
