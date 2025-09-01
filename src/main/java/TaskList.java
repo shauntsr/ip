@@ -9,6 +9,8 @@ public class TaskList {
 
     public void markTask(int taskIndex) {
         taskList[taskIndex].setIsDone(true);
+        System.out.println("Nice! Another task down!");
+        System.out.println("   " + taskList[taskIndex].getDisplayString());
     }
 
     public void printTasks() {
