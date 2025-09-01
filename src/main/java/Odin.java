@@ -17,27 +17,23 @@ public class Odin {
         while (true) {
             String input = scanner.nextLine();
 
+            printHorizontalLine();
             if (input.equals("bye")) {
-                break;
+                System.out.println("Bye. Hope to see you again soon!");
+                printHorizontalLine();
+                return;
             }
-
             if (input.equals("list")) {
-                printHorizontalLine();
+                System.out.println("These are your tasks.");
                 t.printTasks();
-                printHorizontalLine();
             } else if (input.startsWith("mark")) {
                 int taskIndex = Integer.parseInt(input.split(" ")[1]) - 1;
                 t.markTask(taskIndex);
             } else {
                 t.addTask(input);
-                printHorizontalLine();
                 System.out.println("added: " + input);
-                printHorizontalLine();
             }
+            printHorizontalLine();
         }
-
-        printHorizontalLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        printHorizontalLine();
-    }
+   }
 }
