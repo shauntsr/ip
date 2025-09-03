@@ -22,7 +22,8 @@ public class TaskList {
     public void printTasks() {
         for (int i = 0; i < taskCount; i++) {
             Task currTask = taskList[i];
-            System.out.println(i+1 + ". " + currTask.getDisplayString());
+            int taskIndex = i + 1;
+            System.out.println(taskIndex + ". " + currTask.getDisplayString());
         }
     }
 }
