@@ -1,5 +1,6 @@
 public class TaskList {
-    private Task[] taskList = new Task[100];
+    static final int MAX_TASKS = 100;
+    private Task[] taskList = new Task[MAX_TASKS];
     private int taskCount = 0;
 
     public void addTask(Task task) {

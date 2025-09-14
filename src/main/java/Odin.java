@@ -6,7 +6,7 @@ public class Odin {
     }
 
     public static void main(String[] args) {
-        TaskList t = new TaskList();
+        TaskList taskList = new TaskList();
 
         // Introduction
         printHorizontalLine();
@@ -19,12 +19,12 @@ public class Odin {
             String input = scanner.nextLine();
 
             printHorizontalLine();
-            if (handleInput(input, t)) return;
+            if (handleInput(input, taskList)) return;
             printHorizontalLine();
         }
     }
 
-    public static boolean handleInput(String input, TaskList t) {
+    public static boolean handleInput(String input, TaskList taskList) {
         String[] splitInput = input.split(" ", 2);
         String command = splitInput[0];
         String taskDetails = splitInput.length > 1 ? splitInput[1] : null;
@@ -36,30 +36,30 @@ public class Odin {
             return true;
         case "list":
             System.out.println("These are your tasks.");
-            t.printTasks();
+            taskList.printTasks();
             break;
         case "mark":
             int markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-            t.markTask(markIndex);
+            taskList.markTask(markIndex);
             break;
         case "unmark":
             int unmarkIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-            t.unmarkTask(unmarkIndex);
+            taskList.unmarkTask(unmarkIndex);
             break;
         case "todo":
             ToDo toDo = new ToDo(taskDetails);
-            t.addTask(toDo);
+            taskList.addTask(toDo);
             break;
         case "deadline":
             String[] splitDeadlineInput = taskDetails.split(" /by ");
             Deadline deadline = new Deadline(splitDeadlineInput[0], splitDeadlineInput[1]);
-            t.addTask(deadline);
+            taskList.addTask(deadline);
             break;
         case "event":
             String[] splitEventInput = taskDetails.split(" /from ");
             String[] splitEventTimings = splitEventInput[1].split(" /to ");
             Event event = new Event(splitEventInput[0], splitEventTimings[0], splitEventTimings[1]);
-            t.addTask(event);
+            taskList.addTask(event);
             break;
         default:
             System.out.println("Easter egg found.");
