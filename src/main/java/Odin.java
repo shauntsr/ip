@@ -50,6 +50,17 @@ public class Odin {
             ToDo toDo = new ToDo(taskDetails);
             t.addTask(toDo);
             break;
+        case "deadline":
+            String[] splitDeadlineInput = taskDetails.split(" /by ");
+            Deadline deadline = new Deadline(splitDeadlineInput[0], splitDeadlineInput[1]);
+            t.addTask(deadline);
+            break;
+        case "event":
+            String[] splitEventInput = taskDetails.split(" /from ");
+            String[] splitEventTimings = splitEventInput[1].split(" /to ");
+            Event event = new Event(splitEventInput[0], splitEventTimings[0], splitEventTimings[1]);
+            t.addTask(event);
+            break;
         default:
             System.out.println("Easter egg found.");
         }

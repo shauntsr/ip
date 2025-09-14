@@ -7,6 +7,7 @@ public class TaskList {
         taskCount++;
         System.out.println("Successfully added: ");
         System.out.println(taskList[taskCount - 1]);
+        System.out.println("You now have " + taskCount + " tasks.");
     }
 
     public void markTask(int taskIndex) {
