@@ -10,20 +10,20 @@ public class TaskList {
     public void markTask(int taskIndex) {
         taskList[taskIndex].setIsDone(true);
         System.out.println("Nice! Another task down!");
-        System.out.println("   " + taskList[taskIndex].getDisplayString());
+        System.out.println("   " + taskList[taskIndex].toString());
     }
 
     public void unmarkTask(int taskIndex) {
         taskList[taskIndex].setIsDone(false);
         System.out.println("Please tell me it was a misinput.");
-        System.out.println("   " + taskList[taskIndex].getDisplayString());
+        System.out.println("   " + taskList[taskIndex].toString());
     }
 
     public void printTasks() {
         for (int i = 0; i < taskCount; i++) {
             Task currTask = taskList[i];
             int taskIndex = i + 1;
-            System.out.println(taskIndex + ". " + currTask.getDisplayString());
+            System.out.println(taskIndex + ". " + currTask.toString());
         }
     }
 }
