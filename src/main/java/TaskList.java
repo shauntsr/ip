@@ -2,9 +2,11 @@ public class TaskList {
     private Task[] taskList = new Task[100];
     private int taskCount = 0;
 
-    public void addTask(String description) {
-        taskList[taskCount] = new Task(description);
+    public void addTask(Task task) {
+        taskList[taskCount] = task;
         taskCount++;
+        System.out.println("Successfully added: ");
+        System.out.println(taskList[taskCount - 1]);
     }
 
     public void markTask(int taskIndex) {

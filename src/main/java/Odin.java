@@ -25,7 +25,9 @@ public class Odin {
     }
 
     public static boolean handleInput(String input, TaskList t) {
-        String command = input.split(" ")[0];
+        String[] splitInput = input.split(" ", 2);
+        String command = splitInput[0];
+        String taskDetails = splitInput.length > 1 ? splitInput[1] : null;
 
         switch (command) {
         case "bye":
@@ -44,9 +46,12 @@ public class Odin {
             int unmarkIndex = Integer.parseInt(input.split(" ")[1]) - 1;
             t.unmarkTask(unmarkIndex);
             break;
+        case "todo":
+            ToDo toDo = new ToDo(taskDetails);
+            t.addTask(toDo);
+            break;
         default:
-            t.addTask(input);
-            System.out.println("added: " + input);
+            System.out.println("Easter egg found.");
         }
         return false;
     }
