@@ -12,6 +12,10 @@ These are your tasks.
 1. [T][ ] borrow book
 __________________________________________
 __________________________________________
+Error:
+   Deadline should follow the format: TASK /by DEADLINE
+__________________________________________
+__________________________________________
 Successfully added:
 [D][ ] return book (by Sunday)
 You now have 2 tasks.
@@ -24,6 +28,10 @@ __________________________________________
 These are your tasks.
 1. [T][ ] borrow book
 2. [D][X] return book (by Sunday)
+__________________________________________
+__________________________________________
+Error:
+   Index is not valid.
 __________________________________________
 __________________________________________
 Bye. Hope to see you again soon!

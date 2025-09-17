@@ -1,6 +1,8 @@
 todo borrow book
 list
+deadline return book /by
 deadline return book /by Sunday
 mark 2
 list
+unmark 5
 bye
