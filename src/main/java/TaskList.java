@@ -12,12 +12,18 @@ public class TaskList {
     }
 
     public void markTask(int taskIndex) {
+        if (taskIndex < 0 || taskIndex >= taskCount) {
+            throw new IndexOutOfBoundsException();
+        }
         taskList[taskIndex].setIsDone(true);
         System.out.println("Nice! Another task down!");
         System.out.println("   " + taskList[taskIndex].toString());
     }
 
     public void unmarkTask(int taskIndex) {
+        if (taskIndex < 0 || taskIndex >= taskCount) {
+            throw new IndexOutOfBoundsException();
+        }
         taskList[taskIndex].setIsDone(false);
         System.out.println("Please tell me it was a misinput.");
         System.out.println("   " + taskList[taskIndex].toString());

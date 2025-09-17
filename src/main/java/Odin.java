@@ -6,7 +6,7 @@ public class Odin {
     }
 
     public static void printErrorMessage(String errorMessage) {
-        System.out.println("Error:\n" + errorMessage);
+        System.out.println("Error:\n   " + errorMessage);
     }
 
     public static void main(String[] args) {
@@ -43,10 +43,22 @@ public class Odin {
             taskList.printTasks();
             break;
         case "mark":
-            handleMark(input, taskList);
+            try {
+                handleMark(input, taskList);
+            } catch (NumberFormatException e) {
+                printErrorMessage("Index should be an integer");
+            } catch (IndexOutOfBoundsException e) {
+                printErrorMessage("Index is not valid.");
+            }
             break;
         case "unmark":
-            handleUnmark(input, taskList);
+            try {
+                handleUnmark(input, taskList);
+            } catch (NumberFormatException e) {
+                printErrorMessage("Index should be an integer");
+            } catch (IndexOutOfBoundsException e) {
+                printErrorMessage("Index is not valid.");
+            }
             break;
         case "todo":
             try {
