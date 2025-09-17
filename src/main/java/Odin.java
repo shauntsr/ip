@@ -39,32 +39,55 @@ public class Odin {
             taskList.printTasks();
             break;
         case "mark":
-            int markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-            taskList.markTask(markIndex);
+            handleMark(input, taskList);
             break;
         case "unmark":
-            int unmarkIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-            taskList.unmarkTask(unmarkIndex);
+            handleUnmark(input, taskList);
             break;
         case "todo":
-            ToDo toDo = new ToDo(taskDetails);
-            taskList.addTask(toDo);
+            addTodo(taskList, taskDetails);
             break;
         case "deadline":
-            String[] splitDeadlineInput = taskDetails.split(" /by ");
-            Deadline deadline = new Deadline(splitDeadlineInput[0], splitDeadlineInput[1]);
-            taskList.addTask(deadline);
+            addDeadline(taskList, taskDetails);
             break;
         case "event":
-            String[] splitEventInput = taskDetails.split(" /from ");
-            String[] splitEventTimings = splitEventInput[1].split(" /to ");
-            Event event = new Event(splitEventInput[0], splitEventTimings[0], splitEventTimings[1]);
-            taskList.addTask(event);
+            addEvent(taskList, taskDetails);
             break;
         default:
             System.out.println("Easter egg found.");
         }
         return false;
+    }
+
+    private static void addTodo(TaskList taskList, String taskDetails) {
+        if (taskDetails == null) {
+            throw new NullPointerException();
+        }
+        ToDo toDo = new ToDo(taskDetails);
+        taskList.addTask(toDo);
+    }
+
+    private static void addDeadline(TaskList taskList, String taskDetails) {
+        String[] splitDeadlineInput = taskDetails.split(" /by ");
+        Deadline deadline = new Deadline(splitDeadlineInput[0], splitDeadlineInput[1]);
+        taskList.addTask(deadline);
+    }
+
+    private static void addEvent(TaskList taskList, String taskDetails) {
+        String[] splitEventInput = taskDetails.split(" /from ");
+        String[] splitEventTimings = splitEventInput[1].split(" /to ");
+        Event event = new Event(splitEventInput[0], splitEventTimings[0], splitEventTimings[1]);
+        taskList.addTask(event);
+    }
+
+    private static void handleUnmark(String input, TaskList taskList) {
+        int unmarkIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+        taskList.unmarkTask(unmarkIndex);
+    }
+
+    private static void handleMark(String input, TaskList taskList) {
+        int markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+        taskList.markTask(markIndex);
     }
 
 }
