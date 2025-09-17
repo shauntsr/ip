@@ -6,7 +6,7 @@ public class Odin {
     }
 
     public static void printErrorMessage(String errorMessage) {
-        System.out.println("Error: " + errorMessage);
+        System.out.println("Error:\n" + errorMessage);
     }
 
     public static void main(String[] args) {
@@ -55,20 +55,27 @@ public class Odin {
                 printErrorMessage("Missing todo item.");
             }
             break;
+
         case "deadline":
             try {
                 addDeadline(taskList, taskDetails);
             } catch (NullPointerException e) {
                 printErrorMessage("Missing deadline item.");
+            } catch (IllegalTaskException e) {
+                printErrorMessage(e.getMessage());
             }
             break;
+
         case "event":
             try {
                 addEvent(taskList, taskDetails);
             } catch (NullPointerException e) {
                 printErrorMessage("Missing event item.");
+            } catch (IllegalTaskException e) {
+                printErrorMessage(e.getMessage());
             }
             break;
+
         default:
             System.out.println("Easter egg found.");
         }
@@ -84,23 +91,32 @@ public class Odin {
         taskList.addTask(toDo);
     }
 
-    private static void addDeadline(TaskList taskList, String taskDetails) {
+    private static void addDeadline(TaskList taskList, String taskDetails) throws IllegalTaskException {
         if (taskDetails == null) {
             throw new NullPointerException();
         }
 
         String[] splitDeadlineInput = taskDetails.split(" /by ");
+        if (splitDeadlineInput.length != 2) {
+            throw new IllegalTaskException("Deadline should follow the format: TASK /by DEADLINE");
+        }
         Deadline deadline = new Deadline(splitDeadlineInput[0], splitDeadlineInput[1]);
         taskList.addTask(deadline);
     }
 
-    private static void addEvent(TaskList taskList, String taskDetails) {
+    private static void addEvent(TaskList taskList, String taskDetails) throws IllegalTaskException {
         if (taskDetails == null) {
             throw new NullPointerException();
         }
 
         String[] splitEventInput = taskDetails.split(" /from ");
+        if (splitEventInput.length < 2) {
+            throw new IllegalTaskException("Missing start time.");
+        }
         String[] splitEventTimings = splitEventInput[1].split(" /to ");
+        if (splitEventTimings.length < 2) {
+            throw new IllegalTaskException("Missing end time.");
+        }
         Event event = new Event(splitEventInput[0], splitEventTimings[0], splitEventTimings[1]);
         taskList.addTask(event);
     }
