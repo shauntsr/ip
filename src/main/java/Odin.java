@@ -5,6 +5,10 @@ public class Odin {
         System.out.println("__________________________________________");
     }
 
+    public static void printErrorMessage(String errorMessage) {
+        System.out.println("Error: " + errorMessage);
+    }
+
     public static void main(String[] args) {
         TaskList taskList = new TaskList();
 
@@ -45,13 +49,25 @@ public class Odin {
             handleUnmark(input, taskList);
             break;
         case "todo":
-            addTodo(taskList, taskDetails);
+            try {
+                addTodo(taskList, taskDetails);
+            } catch (NullPointerException e) {
+                printErrorMessage("Missing todo item.");
+            }
             break;
         case "deadline":
-            addDeadline(taskList, taskDetails);
+            try {
+                addDeadline(taskList, taskDetails);
+            } catch (NullPointerException e) {
+                printErrorMessage("Missing deadline item.");
+            }
             break;
         case "event":
-            addEvent(taskList, taskDetails);
+            try {
+                addEvent(taskList, taskDetails);
+            } catch (NullPointerException e) {
+                printErrorMessage("Missing event item.");
+            }
             break;
         default:
             System.out.println("Easter egg found.");
@@ -63,17 +79,26 @@ public class Odin {
         if (taskDetails == null) {
             throw new NullPointerException();
         }
+
         ToDo toDo = new ToDo(taskDetails);
         taskList.addTask(toDo);
     }
 
     private static void addDeadline(TaskList taskList, String taskDetails) {
+        if (taskDetails == null) {
+            throw new NullPointerException();
+        }
+
         String[] splitDeadlineInput = taskDetails.split(" /by ");
         Deadline deadline = new Deadline(splitDeadlineInput[0], splitDeadlineInput[1]);
         taskList.addTask(deadline);
     }
 
     private static void addEvent(TaskList taskList, String taskDetails) {
+        if (taskDetails == null) {
+            throw new NullPointerException();
+        }
+
         String[] splitEventInput = taskDetails.split(" /from ");
         String[] splitEventTimings = splitEventInput[1].split(" /to ");
         Event event = new Event(splitEventInput[0], splitEventTimings[0], splitEventTimings[1]);
