@@ -1,5 +1,5 @@
 __________________________________________
-Hello! I'm Odin
+Hello! I'm odin.Odin
 What can I do for you?
 __________________________________________
 __________________________________________
@@ -13,7 +13,7 @@ These are your tasks.
 __________________________________________
 __________________________________________
 Error:
-   Deadline should follow the format: TASK /by DEADLINE
+   odin.task.Deadline should follow the format: TASK /by DEADLINE
 __________________________________________
 __________________________________________
 Successfully added:
