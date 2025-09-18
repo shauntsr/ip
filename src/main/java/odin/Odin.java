@@ -1,3 +1,10 @@
+package odin;
+
+import odin.task.Deadline;
+import odin.task.Event;
+import odin.task.TaskList;
+import odin.task.ToDo;
+
 import java.util.Scanner;
 
 public class Odin {
@@ -14,7 +21,7 @@ public class Odin {
 
         // Introduction
         printHorizontalLine();
-        System.out.println("Hello! I'm Odin");
+        System.out.println("Hello! I'm odin.Odin");
         System.out.println("What can I do for you?");
         printHorizontalLine();
 
@@ -110,7 +117,7 @@ public class Odin {
 
         String[] splitDeadlineInput = taskDetails.split(" /by ");
         if (splitDeadlineInput.length != 2) {
-            throw new IllegalTaskException("Deadline should follow the format: TASK /by DEADLINE");
+            throw new IllegalTaskException("odin.task.Deadline should follow the format: TASK /by DEADLINE");
         }
         Deadline deadline = new Deadline(splitDeadlineInput[0], splitDeadlineInput[1]);
         taskList.addTask(deadline);
