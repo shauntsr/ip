@@ -21,7 +21,7 @@ public class Odin {
 
         // Introduction
         printHorizontalLine();
-        System.out.println("Hello! I'm odin.Odin");
+        System.out.println("Hello! I'm Odin");
         System.out.println("What can I do for you?");
         printHorizontalLine();
 
