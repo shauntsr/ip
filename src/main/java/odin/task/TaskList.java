@@ -30,6 +30,16 @@ public class TaskList {
         System.out.println("   " + taskList.get(taskIndex).toString());
     }
 
+    public void deleteTask(int taskIndex) {
+        if (taskIndex < 0 || taskIndex >= taskList.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        System.out.println("Deleting task " + (taskIndex + 1) + "...");
+        System.out.println("   " + taskList.get(taskIndex).toString());
+        taskList.remove(taskIndex);
+        System.out.println("You now have " + taskList.size() + " tasks.");
+    }
+
     public void printTasks() {
         for (int i = 0; i < taskList.size(); i++) {
             Task currTask = taskList.get(i);
