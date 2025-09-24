@@ -6,8 +6,10 @@ import odin.task.Task;
 import odin.task.TaskList;
 import odin.task.ToDo;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -27,16 +29,12 @@ public class Storage {
     public Task handleFileString(String fileString) throws IllegalFileException {
         char taskType = fileString.charAt(0);
 
-        switch (taskType) {
-        case 'T':
-            return ToDo.fromFileString(fileString);
-        case 'D':
-            return Deadline.fromFileString(fileString);
-        case 'E':
-            return Event.fromFileString(fileString);
-        default:
-            throw new IllegalFileException("Incorrect file format.");
-        }
+        return switch (taskType) {
+            case 'T' -> ToDo.fromFileString(fileString);
+            case 'D' -> Deadline.fromFileString(fileString);
+            case 'E' -> Event.fromFileString(fileString);
+            default -> throw new IllegalFileException("Incorrect file format.");
+        };
 
     }
 
@@ -71,4 +69,16 @@ public class Storage {
 
         return taskList;
     }
+
+    public void saveTasks(TaskList taskList, int listSize) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+
+        for (int i = 0; i < listSize; i++) {
+            writer.write(taskList.getTask(i).toFileString());
+            writer.newLine();
+        }
+
+        writer.close();
+    }
+
 }

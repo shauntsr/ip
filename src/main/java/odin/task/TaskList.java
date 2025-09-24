@@ -38,4 +38,12 @@ public class TaskList {
             System.out.println(taskIndex + ". " + currTask.toString());
         }
     }
+
+    public int getTaskCount() {
+        return this.taskCount;
+    }
+
+    public Task getTask(int index) {
+        return taskList[index];
+    }
 }

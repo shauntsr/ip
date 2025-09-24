@@ -5,7 +5,6 @@ import odin.task.Event;
 import odin.task.TaskList;
 import odin.task.ToDo;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -41,12 +40,12 @@ public class Odin {
             String input = scanner.nextLine();
 
             printHorizontalLine();
-            if (handleInput(input, taskList)) return;
+            if (handleInput(input, taskList, storage)) return;
             printHorizontalLine();
         }
     }
 
-    public static boolean handleInput(String input, TaskList taskList) {
+    public static boolean handleInput(String input, TaskList taskList, Storage storage) {
         String[] splitInput = input.split(" ", 2);
         String command = splitInput[0];
         String taskDetails = splitInput.length > 1 ? splitInput[1] : null;
@@ -81,17 +80,21 @@ public class Odin {
         case "todo":
             try {
                 addTodo(taskList, taskDetails);
+                storage.saveTasks(taskList, taskList.getTaskCount());
             } catch (NullPointerException e) {
                 printErrorMessage("Missing todo item.");
+            } catch (IOException e) {
+                printErrorMessage(e.getMessage());
             }
             break;
 
         case "deadline":
             try {
                 addDeadline(taskList, taskDetails);
+                storage.saveTasks(taskList, taskList.getTaskCount());
             } catch (NullPointerException e) {
                 printErrorMessage("Missing deadline item.");
-            } catch (IllegalTaskException e) {
+            } catch (IllegalTaskException | IOException e) {
                 printErrorMessage(e.getMessage());
             }
             break;
@@ -99,9 +102,10 @@ public class Odin {
         case "event":
             try {
                 addEvent(taskList, taskDetails);
+                storage.saveTasks(taskList, taskList.getTaskCount());
             } catch (NullPointerException e) {
                 printErrorMessage("Missing event item.");
-            } catch (IllegalTaskException e) {
+            } catch (IllegalTaskException | IOException e) {
                 printErrorMessage(e.getMessage());
             }
             break;
