@@ -14,4 +14,15 @@ public class ToDo extends Task {
     public String toFileString() {
         return "T" + DELIM + super.toFileString();
     }
+
+    public ToDo fromFileString(String fileString) {
+        String[] splitFileString = fileString.split(DELIM);
+        ToDo toDo = new ToDo(splitFileString[2]);
+
+        if (splitFileString[1].equals("1")) {
+            toDo.setIsDone(true);
+        }
+
+        return toDo;
+    }
 }
