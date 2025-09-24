@@ -20,7 +20,7 @@ public class Event extends Task {
         return "E" + DELIM + super.toFileString() + DELIM + from + DELIM + to;
     }
 
-    public Event fromFileString(String fileString) {
+    public static Event fromFileString(String fileString) {
         String[] splitFileString = fileString.split(DELIM);
         Event event = new Event(splitFileString[2], splitFileString[3], splitFileString[4]);
 

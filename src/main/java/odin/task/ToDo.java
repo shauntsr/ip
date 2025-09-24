@@ -15,7 +15,7 @@ public class ToDo extends Task {
         return "T" + DELIM + super.toFileString();
     }
 
-    public ToDo fromFileString(String fileString) {
+    public static ToDo fromFileString(String fileString) {
         String[] splitFileString = fileString.split(DELIM);
         ToDo toDo = new ToDo(splitFileString[2]);
 

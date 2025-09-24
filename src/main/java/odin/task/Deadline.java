@@ -18,7 +18,7 @@ public class Deadline extends Task {
         return "D" + DELIM + super.toFileString() + DELIM + by;
     }
 
-    public Deadline fromFileString(String fileString) {
+    public static Deadline fromFileString(String fileString) {
         String[] splitFileString = fileString.split(DELIM);
         Deadline deadline = new Deadline(splitFileString[2], splitFileString[3]);
 

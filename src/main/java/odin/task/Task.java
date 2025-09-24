@@ -31,6 +31,4 @@ public abstract class Task {
         String fileStatusIcon = isDone ? "1" : "0";
         return fileStatusIcon + DELIM + description;
     }
-
-    public abstract Task fromFileString(String fileString);
 }
