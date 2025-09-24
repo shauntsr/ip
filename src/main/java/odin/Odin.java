@@ -5,6 +5,8 @@ import odin.task.Event;
 import odin.task.TaskList;
 import odin.task.ToDo;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Odin {
@@ -17,7 +19,16 @@ public class Odin {
     }
 
     public static void main(String[] args) {
-        TaskList taskList = new TaskList();
+        Storage storage = new Storage();
+        TaskList taskList;
+
+        try {
+            storage.init();
+            taskList = storage.loadTasks();
+        } catch (IllegalFileException | IOException e) {
+            printErrorMessage(e.getMessage());
+            return;
+        }
 
         // Introduction
         printHorizontalLine();

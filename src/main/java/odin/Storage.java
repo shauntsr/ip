@@ -1,5 +1,17 @@
 package odin;
 
+import odin.task.Deadline;
+import odin.task.Event;
+import odin.task.Task;
+import odin.task.TaskList;
+import odin.task.ToDo;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
+
 public class Storage {
     static final String DEFAULT_FILE_PATH = "./data/tasks.txt";
     private String filePath;
@@ -12,5 +24,51 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    public Task handleFileString(String fileString) throws IllegalFileException {
+        char taskType = fileString.charAt(0);
 
+        switch (taskType) {
+        case 'T':
+            return ToDo.fromFileString(fileString);
+        case 'D':
+            return Deadline.fromFileString(fileString);
+        case 'E':
+            return Event.fromFileString(fileString);
+        default:
+            throw new IllegalFileException("Incorrect file format.");
+        }
+
+    }
+
+    public void init() throws IOException {
+        File file = new File(filePath);
+
+        // If file exists, nothing to do
+        if (file.exists()) {
+            System.out.println("Save file found.");
+            return;
+        }
+
+        System.out.println("No save file found. Starting new save file.");
+        File parentFile = file.getParentFile();
+        parentFile.mkdirs();
+        if (file.createNewFile()) {
+            System.out.println("New save file created at " + file.getPath());
+        }
+    }
+
+    public TaskList loadTasks() throws FileNotFoundException, IllegalFileException {
+        File file = new File(filePath);
+
+        TaskList taskList = new TaskList();
+        Scanner scanner = new Scanner(file);
+
+        while (scanner.hasNext()) {
+            String fileString = scanner.nextLine();
+            Task task = handleFileString(fileString);
+            taskList.addTask(task);
+        }
+
+        return taskList;
+    }
 }

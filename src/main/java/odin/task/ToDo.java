@@ -16,7 +16,7 @@ public class ToDo extends Task {
     }
 
     public static ToDo fromFileString(String fileString) {
-        String[] splitFileString = fileString.split(DELIM);
+        String[] splitFileString = fileString.split(" \\| ");
         ToDo toDo = new ToDo(splitFileString[2]);
 
         if (splitFileString[1].equals("1")) {

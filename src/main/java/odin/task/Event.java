@@ -21,7 +21,7 @@ public class Event extends Task {
     }
 
     public static Event fromFileString(String fileString) {
-        String[] splitFileString = fileString.split(DELIM);
+        String[] splitFileString = fileString.split(" \\| ");
         Event event = new Event(splitFileString[2], splitFileString[3], splitFileString[4]);
 
         if (splitFileString[1].equals("1")) {

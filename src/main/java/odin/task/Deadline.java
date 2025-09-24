@@ -19,7 +19,7 @@ public class Deadline extends Task {
     }
 
     public static Deadline fromFileString(String fileString) {
-        String[] splitFileString = fileString.split(DELIM);
+        String[] splitFileString = fileString.split(" \\| ");
         Deadline deadline = new Deadline(splitFileString[2], splitFileString[3]);
 
         if (splitFileString[1].equals("1")) {
