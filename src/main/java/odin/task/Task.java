@@ -1,6 +1,8 @@
 package odin.task;
 
-public class Task {
+public abstract class Task {
+    public static final String DELIM = " | ";
+
     private String description;
     private boolean isDone = false;
 
@@ -23,5 +25,10 @@ public class Task {
     @Override
     public String toString() {
         return getStatusIcon() + " " + description;
+    }
+
+    public String toFileString() {
+        String fileStatusIcon = isDone ? "1" : "0";
+        return fileStatusIcon + DELIM + description;
     }
 }
