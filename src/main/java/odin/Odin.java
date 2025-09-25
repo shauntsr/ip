@@ -21,7 +21,7 @@ public class Odin {
 
         // Introduction
         printHorizontalLine();
-        System.out.println("Hello! I'm odin.Odin");
+        System.out.println("Hello! I'm Odin");
         System.out.println("What can I do for you?");
         printHorizontalLine();
 
@@ -67,6 +67,15 @@ public class Odin {
                 printErrorMessage("Index is not valid.");
             }
             break;
+        case "delete":
+            try {
+                handleDelete(input, taskList);
+            } catch (NumberFormatException e) {
+                printErrorMessage("Index should be an integer");
+            } catch (IndexOutOfBoundsException e) {
+                printErrorMessage("Index is not valid.");
+            }
+            break;
         case "todo":
             try {
                 addTodo(taskList, taskDetails);
@@ -74,7 +83,6 @@ public class Odin {
                 printErrorMessage("Missing todo item.");
             }
             break;
-
         case "deadline":
             try {
                 addDeadline(taskList, taskDetails);
@@ -84,7 +92,6 @@ public class Odin {
                 printErrorMessage(e.getMessage());
             }
             break;
-
         case "event":
             try {
                 addEvent(taskList, taskDetails);
@@ -148,6 +155,11 @@ public class Odin {
     private static void handleMark(String input, TaskList taskList) {
         int markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
         taskList.markTask(markIndex);
+    }
+
+    private static void handleDelete(String input, TaskList taskList) {
+        int markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+        taskList.deleteTask(markIndex);
     }
 
 }

@@ -1,39 +1,48 @@
 package odin.task;
 
+import java.util.ArrayList;
+
 public class TaskList {
-    static final int MAX_TASKS = 100;
-    private Task[] taskList = new Task[MAX_TASKS];
-    private int taskCount = 0;
+    private ArrayList<Task> taskList = new ArrayList<>();
 
     public void addTask(Task task) {
-        taskList[taskCount] = task;
-        taskCount++;
+        taskList.add(task);
         System.out.println("Successfully added:");
-        System.out.println(taskList[taskCount - 1]);
-        System.out.println("You now have " + taskCount + " tasks.");
+        System.out.println(taskList.get(taskList.size() - 1));
+        System.out.println("You now have " + taskList.size() + " tasks.");
     }
 
     public void markTask(int taskIndex) {
-        if (taskIndex < 0 || taskIndex >= taskCount) {
+        if (taskIndex < 0 || taskIndex >= taskList.size()) {
             throw new IndexOutOfBoundsException();
         }
-        taskList[taskIndex].setIsDone(true);
+        taskList.get(taskIndex).setIsDone(true);
         System.out.println("Nice! Another task down!");
-        System.out.println("   " + taskList[taskIndex].toString());
+        System.out.println("   " + taskList.get(taskIndex).toString());
     }
 
     public void unmarkTask(int taskIndex) {
-        if (taskIndex < 0 || taskIndex >= taskCount) {
+        if (taskIndex < 0 || taskIndex >= taskList.size()) {
             throw new IndexOutOfBoundsException();
         }
-        taskList[taskIndex].setIsDone(false);
+        taskList.get(taskIndex).setIsDone(false);
         System.out.println("Please tell me it was a misinput.");
-        System.out.println("   " + taskList[taskIndex].toString());
+        System.out.println("   " + taskList.get(taskIndex).toString());
+    }
+
+    public void deleteTask(int taskIndex) {
+        if (taskIndex < 0 || taskIndex >= taskList.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+        System.out.println("Deleting task " + (taskIndex + 1) + "...");
+        System.out.println("   " + taskList.get(taskIndex).toString());
+        taskList.remove(taskIndex);
+        System.out.println("You now have " + taskList.size() + " tasks.");
     }
 
     public void printTasks() {
-        for (int i = 0; i < taskCount; i++) {
-            Task currTask = taskList[i];
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currTask = taskList.get(i);
             int taskIndex = i + 1;
             System.out.println(taskIndex + ". " + currTask.toString());
         }
