@@ -49,10 +49,10 @@ public class TaskList {
     }
 
     public int getTaskCount() {
-        return this.taskCount;
+        return taskList.size();
     }
 
     public Task getTask(int index) {
-        return taskList[index];
+        return taskList.get(index);
     }
 }
