@@ -62,28 +62,37 @@ public class Odin {
         case "mark":
             try {
                 handleMark(input, taskList);
+                storage.saveTasks(taskList, taskList.getTaskCount());
             } catch (NumberFormatException e) {
                 printErrorMessage("Index should be an integer");
             } catch (IndexOutOfBoundsException e) {
                 printErrorMessage("Index is not valid.");
+            } catch (IOException e) {
+                printErrorMessage(e.getMessage());
             }
             break;
         case "unmark":
             try {
                 handleUnmark(input, taskList);
+                storage.saveTasks(taskList, taskList.getTaskCount());
             } catch (NumberFormatException e) {
                 printErrorMessage("Index should be an integer");
             } catch (IndexOutOfBoundsException e) {
                 printErrorMessage("Index is not valid.");
+            } catch (IOException e) {
+                printErrorMessage(e.getMessage());
             }
             break;
         case "delete":
             try {
                 handleDelete(input, taskList);
+                storage.saveTasks(taskList, taskList.getTaskCount());
             } catch (NumberFormatException e) {
                 printErrorMessage("Index should be an integer");
             } catch (IndexOutOfBoundsException e) {
                 printErrorMessage("Index is not valid.");
+            } catch (IOException e) {
+                printErrorMessage(e.getMessage());
             }
             break;
         case "todo":
