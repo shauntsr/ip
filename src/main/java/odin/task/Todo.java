@@ -1,7 +1,7 @@
 package odin.task;
 
-public class ToDo extends Task {
-    public ToDo(String description) {
+public class Todo extends Task {
+    public Todo(String description) {
         super(description);
     }
 
@@ -15,9 +15,9 @@ public class ToDo extends Task {
         return "T" + DELIM + super.toFileString();
     }
 
-    public static ToDo fromFileString(String fileString) {
+    public static Todo fromFileString(String fileString) {
         String[] splitFileString = fileString.split(" \\| ");
-        ToDo toDo = new ToDo(splitFileString[2]);
+        Todo toDo = new Todo(splitFileString[2]);
 
         if (splitFileString[1].equals("1")) {
             toDo.setIsDone(true);

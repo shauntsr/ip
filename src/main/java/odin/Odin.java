@@ -3,7 +3,7 @@ package odin;
 import odin.task.Deadline;
 import odin.task.Event;
 import odin.task.TaskList;
-import odin.task.ToDo;
+import odin.task.Todo;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -105,7 +105,7 @@ public class Odin {
             throw new NullPointerException();
         }
 
-        ToDo toDo = new ToDo(taskDetails);
+        Todo toDo = new Todo(taskDetails);
         taskList.addTask(toDo);
     }
 
