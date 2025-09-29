@@ -45,4 +45,11 @@ public class Ui {
     public static void printTaskCount(TaskList taskList) {
         System.out.println("You now have " + taskList.getTaskCount() + " tasks.");
     }
+
+    public static void printIntroMessage() {
+        Ui.printHorizontalLine();
+        System.out.println("Hello! I'm Odin");
+        System.out.println("What can I do for you?");
+        Ui.printHorizontalLine();
+    }
 }
