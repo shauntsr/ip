@@ -4,18 +4,12 @@ import odin.task.Deadline;
 import odin.task.Event;
 import odin.task.TaskList;
 import odin.task.Todo;
+import odin.ui.Ui;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 public class Odin {
-    public static void printHorizontalLine() {
-        System.out.println("__________________________________________");
-    }
-
-    public static void printErrorMessage(String errorMessage) {
-        System.out.println("Error:\n   " + errorMessage);
-    }
 
     public static void main(String[] args) {
         Storage storage = new Storage();
@@ -25,23 +19,23 @@ public class Odin {
             storage.init();
             taskList = storage.loadTasks();
         } catch (IllegalFileException | IOException e) {
-            printErrorMessage(e.getMessage());
+            Ui.printErrorMessage(e.getMessage());
             return;
         }
 
         // Introduction
-        printHorizontalLine();
+        Ui.printHorizontalLine();
         System.out.println("Hello! I'm Odin");
         System.out.println("What can I do for you?");
-        printHorizontalLine();
+        Ui.printHorizontalLine();
 
         Scanner scanner = new Scanner(System.in);
         while (true) {
             String input = scanner.nextLine();
 
-            printHorizontalLine();
+            Ui.printHorizontalLine();
             if (handleInput(input, taskList, storage)) return;
-            printHorizontalLine();
+            Ui.printHorizontalLine();
         }
     }
 
@@ -54,11 +48,11 @@ public class Odin {
             switch (command) {
             case "bye":
                 System.out.println("Bye. Hope to see you again soon!");
-                printHorizontalLine();
+                Ui.printHorizontalLine();
                 return true;
             case "list":
                 System.out.println("These are your tasks.");
-                taskList.printTasks();
+                Ui.printTasks(taskList);
                 break;
             case "mark":
                 handleMark(input, taskList);
@@ -88,13 +82,13 @@ public class Odin {
                 System.out.println("Easter egg found.");
             }
         } catch (IllegalTaskException | IOException e) {
-            printErrorMessage(e.getMessage());
+            Ui.printErrorMessage(e.getMessage());
         } catch (NullPointerException e) {
-            printErrorMessage("Missing item to be added.");
+            Ui.printErrorMessage("Missing item to be added.");
         } catch (NumberFormatException e) {
-            printErrorMessage("Index should be an integer.");
+            Ui.printErrorMessage("Index should be an integer.");
         } catch (IndexOutOfBoundsException e) {
-            printErrorMessage("Index is not valid.");
+            Ui.printErrorMessage("Index is not valid.");
         }
 
         return false;
@@ -107,6 +101,7 @@ public class Odin {
 
         Todo toDo = new Todo(taskDetails);
         taskList.addTask(toDo);
+        Ui.printTaskAddedMessage(taskList);
     }
 
     private static void addDeadline(TaskList taskList, String taskDetails) throws IllegalTaskException {
@@ -120,6 +115,7 @@ public class Odin {
         }
         Deadline deadline = new Deadline(splitDeadlineInput[0], splitDeadlineInput[1]);
         taskList.addTask(deadline);
+        Ui.printTaskAddedMessage(taskList);
     }
 
     private static void addEvent(TaskList taskList, String taskDetails) throws IllegalTaskException {
@@ -137,21 +133,26 @@ public class Odin {
         }
         Event event = new Event(splitEventInput[0], splitEventTimings[0], splitEventTimings[1]);
         taskList.addTask(event);
+        Ui.printTaskAddedMessage(taskList);
     }
 
     private static void handleUnmark(String input, TaskList taskList) {
         int unmarkIndex = Integer.parseInt(input.split(" ")[1]) - 1;
         taskList.unmarkTask(unmarkIndex);
+        Ui.printTaskUnmarkedMessage(taskList, unmarkIndex);
     }
 
     private static void handleMark(String input, TaskList taskList) {
         int markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
         taskList.markTask(markIndex);
+        Ui.printTaskMarkedMessage(taskList, markIndex);
     }
 
     private static void handleDelete(String input, TaskList taskList) {
-        int markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
-        taskList.deleteTask(markIndex);
+        int deleteIndex = Integer.parseInt(input.split(" ")[1]) - 1;
+        Ui.printTaskDeletedMessage(taskList, deleteIndex);
+        taskList.deleteTask(deleteIndex);
+        Ui.printTaskCount(taskList);
     }
 
 }
