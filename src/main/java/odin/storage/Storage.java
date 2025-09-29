@@ -1,10 +1,11 @@
-package odin;
+package odin.storage;
 
+import odin.exceptions.IllegalFileException;
 import odin.task.Deadline;
 import odin.task.Event;
 import odin.task.Task;
 import odin.task.TaskList;
-import odin.task.ToDo;
+import odin.task.Todo;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -30,7 +31,7 @@ public class Storage {
         char taskType = fileString.charAt(0);
 
         return switch (taskType) {
-            case 'T' -> ToDo.fromFileString(fileString);
+            case 'T' -> Todo.fromFileString(fileString);
             case 'D' -> Deadline.fromFileString(fileString);
             case 'E' -> Event.fromFileString(fileString);
             default -> throw new IllegalFileException("Incorrect file format.");
