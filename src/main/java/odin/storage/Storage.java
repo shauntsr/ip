@@ -1,6 +1,6 @@
 package odin.storage;
 
-import odin.IllegalFileException;
+import odin.exceptions.IllegalFileException;
 import odin.task.Deadline;
 import odin.task.Event;
 import odin.task.Task;

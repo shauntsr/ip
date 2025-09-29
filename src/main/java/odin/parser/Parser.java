@@ -1,6 +1,6 @@
 package odin.parser;
 
-import odin.IllegalTaskException;
+import odin.exceptions.IllegalTaskException;
 import odin.storage.Storage;
 import odin.task.Deadline;
 import odin.task.Event;

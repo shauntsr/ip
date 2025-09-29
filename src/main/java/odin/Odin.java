@@ -1,5 +1,6 @@
 package odin;
 
+import odin.exceptions.IllegalFileException;
 import odin.parser.Parser;
 import odin.storage.Storage;
 import odin.task.TaskList;
