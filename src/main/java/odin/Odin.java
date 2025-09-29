@@ -50,85 +50,53 @@ public class Odin {
         String command = splitInput[0];
         String taskDetails = splitInput.length > 1 ? splitInput[1] : null;
 
-        switch (command) {
-        case "bye":
-            System.out.println("Bye. Hope to see you again soon!");
-            printHorizontalLine();
-            return true;
-        case "list":
-            System.out.println("These are your tasks.");
-            taskList.printTasks();
-            break;
-        case "mark":
-            try {
+        try {
+            switch (command) {
+            case "bye":
+                System.out.println("Bye. Hope to see you again soon!");
+                printHorizontalLine();
+                return true;
+            case "list":
+                System.out.println("These are your tasks.");
+                taskList.printTasks();
+                break;
+            case "mark":
                 handleMark(input, taskList);
                 storage.saveTasks(taskList, taskList.getTaskCount());
-            } catch (NumberFormatException e) {
-                printErrorMessage("Index should be an integer");
-            } catch (IndexOutOfBoundsException e) {
-                printErrorMessage("Index is not valid.");
-            } catch (IOException e) {
-                printErrorMessage(e.getMessage());
-            }
-            break;
-        case "unmark":
-            try {
+                break;
+            case "unmark":
                 handleUnmark(input, taskList);
                 storage.saveTasks(taskList, taskList.getTaskCount());
-            } catch (NumberFormatException e) {
-                printErrorMessage("Index should be an integer");
-            } catch (IndexOutOfBoundsException e) {
-                printErrorMessage("Index is not valid.");
-            } catch (IOException e) {
-                printErrorMessage(e.getMessage());
-            }
-            break;
-        case "delete":
-            try {
+                break;
+            case "delete":
                 handleDelete(input, taskList);
                 storage.saveTasks(taskList, taskList.getTaskCount());
-            } catch (NumberFormatException e) {
-                printErrorMessage("Index should be an integer");
-            } catch (IndexOutOfBoundsException e) {
-                printErrorMessage("Index is not valid.");
-            } catch (IOException e) {
-                printErrorMessage(e.getMessage());
-            }
-            break;
-        case "todo":
-            try {
+                break;
+            case "todo":
                 addTodo(taskList, taskDetails);
                 storage.saveTasks(taskList, taskList.getTaskCount());
-            } catch (NullPointerException e) {
-                printErrorMessage("Missing todo item.");
-            } catch (IOException e) {
-                printErrorMessage(e.getMessage());
-            }
-            break;
-        case "deadline":
-            try {
+                break;
+            case "deadline":
                 addDeadline(taskList, taskDetails);
                 storage.saveTasks(taskList, taskList.getTaskCount());
-            } catch (NullPointerException e) {
-                printErrorMessage("Missing deadline item.");
-            } catch (IllegalTaskException | IOException e) {
-                printErrorMessage(e.getMessage());
-            }
-            break;
-        case "event":
-            try {
+                break;
+            case "event":
                 addEvent(taskList, taskDetails);
                 storage.saveTasks(taskList, taskList.getTaskCount());
-            } catch (NullPointerException e) {
-                printErrorMessage("Missing event item.");
-            } catch (IllegalTaskException | IOException e) {
-                printErrorMessage(e.getMessage());
+                break;
+            default:
+                System.out.println("Easter egg found.");
             }
-            break;
-
-        default:
-            System.out.println("Easter egg found.");
+        } catch (IllegalTaskException | IOException e) {
+            printErrorMessage(e.getMessage());
+        } catch (NullPointerException e) {
+            printErrorMessage("Missing item to be added.");
+        } catch (NumberFormatException e) {
+            printErrorMessage("Index should be an integer.");
+        } catch (IndexOutOfBoundsException e) {
+            printErrorMessage("Index is not valid.");
         }
+
         return false;
     }
 
