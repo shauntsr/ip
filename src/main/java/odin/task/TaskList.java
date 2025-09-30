@@ -30,6 +30,18 @@ public class TaskList {
         taskList.remove(taskIndex);
     }
 
+    public ArrayList<Integer> findTask(String query) {
+        ArrayList<Integer> taskIndices = new ArrayList<Integer>();
+
+        for (int index = 0; index < taskList.size(); index++) {
+            Task task = taskList.get(index);
+            if (task.getDescription().toLowerCase().contains(query.toLowerCase())) {
+                taskIndices.add(index);
+            }
+        }
+        return taskIndices;
+    }
+
     public int getTaskCount() {
         return taskList.size();
     }

@@ -3,6 +3,8 @@ package odin.ui;
 import odin.task.Task;
 import odin.task.TaskList;
 
+import java.util.ArrayList;
+
 public class Ui {
     public static void printHorizontalLine() {
         System.out.println("__________________________________________");
@@ -44,6 +46,21 @@ public class Ui {
 
     public static void printTaskCount(TaskList taskList) {
         System.out.println("You now have " + taskList.getTaskCount() + " tasks.");
+    }
+
+    public static void printFoundTasks(TaskList taskList, ArrayList<Integer> taskIndices) {
+        System.out.println("Querying...");
+        if (taskIndices.isEmpty()) {
+            System.out.println("Could not find matching task.");
+            return;
+        }
+
+        System.out.println(taskIndices.size() + " matching task(s) were found in your list.");
+        int count = 0;
+        for (int taskIndex : taskIndices) {
+            System.out.println((count + 1) + ". " + taskList.getTask(taskIndex));
+            count++;
+        }
     }
 
     public static void printIntroMessage() {

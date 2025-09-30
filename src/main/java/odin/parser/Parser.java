@@ -11,12 +11,13 @@ import odin.ui.Ui;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 public class Parser {
     public static boolean handleInput(String input, TaskList taskList, Storage storage) {
         String[] splitInput = input.split(" ", 2);
         String command = splitInput[0];
-        String taskDetails = splitInput.length > 1 ? splitInput[1] : null;
+        String commandParams = splitInput.length > 1 ? splitInput[1] : null;
 
         try {
             switch (command) {
@@ -41,24 +42,25 @@ public class Parser {
                 storage.saveTasks(taskList, taskList.getTaskCount());
                 break;
             case "todo":
-                addTodo(taskList, taskDetails);
+                addTodo(taskList, commandParams);
                 storage.saveTasks(taskList, taskList.getTaskCount());
                 break;
             case "deadline":
-                addDeadline(taskList, taskDetails);
+                addDeadline(taskList, commandParams);
                 storage.saveTasks(taskList, taskList.getTaskCount());
                 break;
             case "event":
-                addEvent(taskList, taskDetails);
+                addEvent(taskList, commandParams);
                 storage.saveTasks(taskList, taskList.getTaskCount());
+                break;
+            case "find":
+                findTasks(taskList, commandParams);
                 break;
             default:
                 System.out.println("Easter egg found.");
             }
-        } catch (IllegalTaskException | IOException e) {
+        } catch (IllegalTaskException | IOException | NullPointerException e) {
             Ui.printErrorMessage(e.getMessage());
-        } catch (NullPointerException e) {
-            Ui.printErrorMessage("Missing item to be added.");
         } catch (NumberFormatException e) {
             Ui.printErrorMessage("Index should be an integer.");
         } catch (IndexOutOfBoundsException e) {
@@ -72,7 +74,7 @@ public class Parser {
 
     private static void addTodo(TaskList taskList, String taskDetails) {
         if (taskDetails == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("Missing task details.");
         }
 
         Todo toDo = new Todo(taskDetails);
@@ -83,7 +85,7 @@ public class Parser {
 
     private static void addDeadline(TaskList taskList, String taskDetails) throws IllegalTaskException {
         if (taskDetails == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("Missing task details.");
         }
 
         String[] splitDeadlineInput = taskDetails.split(" /by ");
@@ -98,7 +100,7 @@ public class Parser {
 
     private static void addEvent(TaskList taskList, String taskDetails) throws IllegalTaskException {
         if (taskDetails == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("Missing task details.");
         }
 
         String[] splitEventInput = taskDetails.split(" /from ");
@@ -134,5 +136,13 @@ public class Parser {
         Ui.printTaskDeletedMessage(taskList, deleteIndex);
         taskList.deleteTask(deleteIndex);
         Ui.printTaskCount(taskList);
+    }
+
+    private static void findTasks(TaskList taskList, String commandParams) {
+        if (commandParams == null) {
+            throw new NullPointerException("Query is missing.");
+        }
+        ArrayList<Integer> taskIndices = taskList.findTask(commandParams);
+        Ui.printFoundTasks(taskList, taskIndices);
     }
 }
