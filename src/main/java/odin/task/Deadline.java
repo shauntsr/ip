@@ -1,9 +1,11 @@
 package odin.task;
 
-public class Deadline extends Task {
-    private String by;
+import java.time.LocalDate;
 
-    public Deadline(String description, String by) {
+public class Deadline extends Task {
+    private LocalDate by;
+
+    public Deadline(String description, LocalDate by) {
         super(description);
         this.by = by;
     }
@@ -20,7 +22,7 @@ public class Deadline extends Task {
 
     public static Deadline fromFileString(String fileString) {
         String[] splitFileString = fileString.split(" \\| ");
-        Deadline deadline = new Deadline(splitFileString[2], splitFileString[3]);
+        Deadline deadline = new Deadline(splitFileString[2], LocalDate.parse(splitFileString[3]));
 
         if (splitFileString[1].equals("1")) {
             deadline.setIsDone(true);

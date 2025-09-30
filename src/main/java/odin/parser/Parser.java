@@ -9,6 +9,8 @@ import odin.task.Todo;
 import odin.ui.Ui;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 public class Parser {
     public static boolean handleInput(String input, TaskList taskList, Storage storage) {
@@ -61,6 +63,8 @@ public class Parser {
             Ui.printErrorMessage("Index should be an integer.");
         } catch (IndexOutOfBoundsException e) {
             Ui.printErrorMessage("Index is not valid.");
+        } catch (DateTimeParseException e) {
+            Ui.printErrorMessage("Time should be of format yyyy-MM-dd");
         }
 
         return false;
@@ -86,7 +90,7 @@ public class Parser {
         if (splitDeadlineInput.length != 2) {
             throw new IllegalTaskException("odin.task.Deadline should follow the format: TASK /by DEADLINE");
         }
-        Deadline deadline = new Deadline(splitDeadlineInput[0], splitDeadlineInput[1]);
+        Deadline deadline = new Deadline(splitDeadlineInput[0], LocalDate.parse(splitDeadlineInput[1]));
         taskList.addTask(deadline);
         Ui.printTaskAddedMessage(taskList);
         Ui.printTaskCount(taskList);
