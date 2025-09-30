@@ -143,5 +143,6 @@ public class Parser {
             throw new NullPointerException("Query is missing.");
         }
         ArrayList<Integer> taskIndices = taskList.findTask(commandParams);
+        Ui.printFoundTasks(taskList, taskIndices);
     }
 }
