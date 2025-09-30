@@ -1,8 +1,9 @@
 todo borrow book
 list
 deadline return book /by
-deadline return book /by Sunday
+deadline return book /by 2025-09-12
 mark 2
 list
 unmark 5
+find book
 bye

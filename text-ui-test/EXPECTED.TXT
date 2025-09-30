@@ -1,3 +1,5 @@
+No save file found. Starting new save file.
+New save file created at .\data\tasks.txt
 __________________________________________
 Hello! I'm Odin
 What can I do for you?
@@ -17,21 +19,27 @@ Error:
 __________________________________________
 __________________________________________
 Successfully added:
-[D][ ] return book (by Sunday)
+[D][ ] return book (by Sep 12 2025)
 You now have 2 tasks.
 __________________________________________
 __________________________________________
 Nice! Another task down!
-   [D][X] return book (by Sunday)
+   [D][X] return book (by Sep 12 2025)
 __________________________________________
 __________________________________________
 These are your tasks.
 1. [T][ ] borrow book
-2. [D][X] return book (by Sunday)
+2. [D][X] return book (by Sep 12 2025)
 __________________________________________
 __________________________________________
 Error:
    Index is not valid.
+__________________________________________
+__________________________________________
+Querying...
+2 matching task(s) were found in your list.
+1. [T][ ] borrow book
+2. [D][X] return book (by Sep 12 2025)
 __________________________________________
 __________________________________________
 Bye. Hope to see you again soon!
