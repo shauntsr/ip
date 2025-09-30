@@ -1,10 +1,12 @@
 package odin.task;
 
-public class Event extends Task {
-    private String from;
-    private String to;
+import java.time.LocalDate;
 
-    public Event(String description, String from, String to) {
+public class Event extends Task {
+    private LocalDate from;
+    private LocalDate to;
+
+    public Event(String description, LocalDate from, LocalDate to) {
         super(description);
         this.from = from;
         this.to = to;
@@ -12,7 +14,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
+        return "[E]" + super.toString() + " (from: " + from.format(taskDateFormat) + " to: " + to.format(taskDateFormat) + ")";
     }
 
     @Override
@@ -22,7 +24,9 @@ public class Event extends Task {
 
     public static Event fromFileString(String fileString) {
         String[] splitFileString = fileString.split(" \\| ");
-        Event event = new Event(splitFileString[2], splitFileString[3], splitFileString[4]);
+        LocalDate from = LocalDate.parse(splitFileString[3]);
+        LocalDate to = LocalDate.parse(splitFileString[4]);
+        Event event = new Event(splitFileString[2], from, to);
 
         if (splitFileString[1].equals("1")) {
             event.setIsDone(true);

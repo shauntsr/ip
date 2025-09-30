@@ -1,7 +1,11 @@
 package odin.task;
 
+import java.time.format.DateTimeFormatter;
+
 public abstract class Task {
     public static final String DELIM = " | ";
+
+    protected static final DateTimeFormatter taskDateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     private String description;
     private boolean isDone = false;

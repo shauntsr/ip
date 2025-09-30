@@ -109,7 +109,9 @@ public class Parser {
         if (splitEventTimings.length < 2) {
             throw new IllegalTaskException("Missing end time.");
         }
-        Event event = new Event(splitEventInput[0], splitEventTimings[0], splitEventTimings[1]);
+        LocalDate from = LocalDate.parse(splitEventTimings[0]);
+        LocalDate to = LocalDate.parse(splitEventTimings[1]);
+        Event event = new Event(splitEventInput[0], from, to);
         taskList.addTask(event);
         Ui.printTaskAddedMessage(taskList);
         Ui.printTaskCount(taskList);
