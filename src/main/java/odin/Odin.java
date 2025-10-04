@@ -11,6 +11,11 @@ import java.util.Scanner;
 
 public class Odin {
 
+    /**
+     * Entry point for the chatbot
+     *
+     * @param args - Not needed
+     */
     public static void main(String[] args) {
         Storage storage = new Storage();
         TaskList taskList;
