@@ -1,6 +1,6 @@
 # Odin User Guide
 
-![Screenshot](/docs/Odin_Preview.png)
+![Screenshot](./Odin_Preview.png)
 
 Odin is a simple task management chatbot that helps users organize and
 track their tasks efficiently. It supports adding, marking, unmarking,
