@@ -69,7 +69,7 @@ public class Ui {
      * @param taskIndex The index of the task that was unmarked.
      */
     public static void printTaskUnmarkedMessage(TaskList taskList, int taskIndex) {
-        System.out.println("Please tell me it was a misinput.");
+        System.out.println("Task unmarked. Please tell me it was a misinput.");
         System.out.println("   " + taskList.getTask(taskIndex).toString());
     }
 
