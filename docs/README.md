@@ -6,6 +6,8 @@ Odin is a simple task management chatbot that helps users organize and
 track their tasks efficiently. It supports adding, marking, unmarking,
 deleting, and searching tasks, including todos, deadlines, and events.
 
+Task data is stored persistently and automatically saved after each command, so no work is lost.
+
 ## Adding todos: `todo`
 
 Adds a basic task.
