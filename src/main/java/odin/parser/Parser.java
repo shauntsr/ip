@@ -13,7 +13,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * The {@code Parse} class handles parsing of user input commands
+ */
 public class Parser {
+    /**
+     * Handles a single user input by parsing the command keyword
+     * and executing the corresponding actions.
+     *
+     * @param input    The raw input string entered by the user.
+     * @param taskList The current list of tasks.
+     * @param storage  The storage object used to handle persistence of tasks.
+     * @return {@code true} If the command was "bye" (to exit the program), {@code false} otherwise.
+     */
     public static boolean handleInput(String input, TaskList taskList, Storage storage) {
         String[] splitInput = input.split(" ", 2);
         String command = splitInput[0];
@@ -72,6 +84,13 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Adds a new Todo to the task list.
+     *
+     * @param taskList    The tasklist to add the new task to.
+     * @param taskDetails The description of the Deadline task.
+     * @throws NullPointerException If taskDetails is {@code null}
+     */
     private static void addTodo(TaskList taskList, String taskDetails) {
         if (taskDetails == null) {
             throw new NullPointerException("Missing task details.");
@@ -83,6 +102,14 @@ public class Parser {
         Ui.printTaskCount(taskList);
     }
 
+    /**
+     * Adds a new Deadline to the task list.
+     *
+     * @param taskList    The tasklist to add the new task to.
+     * @param taskDetails The description of the Deadline task.
+     * @throws NullPointerException If taskDetails is {@code null}
+     * @throws IllegalTaskException If input format is invalid.
+     */
     private static void addDeadline(TaskList taskList, String taskDetails) throws IllegalTaskException {
         if (taskDetails == null) {
             throw new NullPointerException("Missing task details.");
@@ -98,6 +125,14 @@ public class Parser {
         Ui.printTaskCount(taskList);
     }
 
+    /**
+     * Adds a new Event to the task list.
+     *
+     * @param taskList    The tasklist to add the new task to.
+     * @param taskDetails The description of the Event task.
+     * @throws NullPointerException If taskDetails is {@code null}
+     * @throws IllegalTaskException If input format is invalid.
+     */
     private static void addEvent(TaskList taskList, String taskDetails) throws IllegalTaskException {
         if (taskDetails == null) {
             throw new NullPointerException("Missing task details.");
@@ -119,18 +154,43 @@ public class Parser {
         Ui.printTaskCount(taskList);
     }
 
+    /**
+     * Marks a task as not done by unmarking it.
+     *
+     * @param input    The full input string containing the command and index.
+     * @param taskList The task list
+     * @throws NumberFormatException     if the provided index is not an integer.
+     * @throws IndexOutOfBoundsException if the index is not valid for the task list.
+     *
+     */
     private static void handleUnmark(String input, TaskList taskList) {
         int unmarkIndex = Integer.parseInt(input.split(" ")[1]) - 1;
         taskList.unmarkTask(unmarkIndex);
         Ui.printTaskUnmarkedMessage(taskList, unmarkIndex);
     }
 
+    /**
+     * Marks a task as done by marking it.
+     *
+     * @param input    The full input string containing the command and index.
+     * @param taskList The task list
+     * @throws NumberFormatException     if the provided index is not an integer.
+     * @throws IndexOutOfBoundsException if the index is not valid for the task list.
+     */
     private static void handleMark(String input, TaskList taskList) {
         int markIndex = Integer.parseInt(input.split(" ")[1]) - 1;
         taskList.markTask(markIndex);
         Ui.printTaskMarkedMessage(taskList, markIndex);
     }
 
+    /**
+     * Deletes a task from tasklist.
+     *
+     * @param input    The full input string containing the command and index.
+     * @param taskList The task list
+     * @throws NumberFormatException     If the provided index is not an integer.
+     * @throws IndexOutOfBoundsException If the index is not valid for the task list.
+     */
     private static void handleDelete(String input, TaskList taskList) {
         int deleteIndex = Integer.parseInt(input.split(" ")[1]) - 1;
         Ui.printTaskDeletedMessage(taskList, deleteIndex);
@@ -138,6 +198,13 @@ public class Parser {
         Ui.printTaskCount(taskList);
     }
 
+    /**
+     * Finds all tasks in the task list that match the given search query.
+     *
+     * @param taskList      The task list to search through.
+     * @param commandParams The search keyword to look for.
+     * @throws NullPointerException If {@code commandParams} is {@code null}.
+     */
     private static void findTasks(TaskList taskList, String commandParams) {
         if (commandParams == null) {
             throw new NullPointerException("Query is missing.");
