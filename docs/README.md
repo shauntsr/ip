@@ -13,7 +13,7 @@ Adds a basic task.
 Format:
 
 ```
-todo TASK_DESCRIPTION 
+todo TASK_DESCRIPTION
 ```
 
 Example:
@@ -98,4 +98,98 @@ These are your tasks.
 1. [T][ ] homework
 2. [D][ ] EE2026 Assignment (by Oct 06 2025)
 3. [E][ ] Orientation (from: Aug 08 2025 to: Aug 10 2025)
+```
+
+## Marking a task: `mark`
+
+Marks a task as done.
+
+Format:
+
+```
+mark TASK_NUMBER
+```
+
+Example:
+
+```
+mark 2
+```
+
+Expected Output:
+
+```
+Nice! Another task down!
+   [D][X] EE2026 Assignment (by Oct 06 2025)
+```
+
+## Unmarking a task: `unmark`
+
+Marks a task as not done.
+
+Format:
+
+```
+unmark TASK_NUMBER
+```
+
+Example:
+
+```
+unmark 2
+```
+
+Expected Output:
+
+```
+Task unmarked. Please tell me it was a misinput.
+   [D][ ] EE2026 Assignment (by Oct 06 2025)
+```
+
+## Deleting a task: `delete`
+
+Deletes a task from the tasklist.
+
+Format:
+
+```
+delete TASK_NUMBER
+```
+
+Example:
+
+```
+delete 3
+```
+
+Expected Output:
+
+```
+Deleting task 3...
+   [E][ ] Orientation (from: Aug 08 2025 to: Aug 10 2025)
+You now have 2 tasks.
+```
+
+## Finding a task: `find`
+
+Finds tasks with the matching keyword. Matching is case-insensitive.
+
+Format:
+
+```
+find QUERY
+```
+
+Example:
+
+```
+find lab
+```
+
+Expected Output:
+
+```
+Querying...
+1 matching task(s) were found in your list.
+1. [D][ ] EE2026 Lab Task (by Oct 06 2025)
 ```
